@@ -3,17 +3,21 @@ import { connect } from "react-redux";
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import logo from 'assets/img/logo.png'
 import { useEffect, useState } from "react";
-import { check_authenticated, load_user, login, refresh } from "redux/actions/auth/auth";
-import { Link, Navigate } from "react-router-dom";
+import { check_authenticated, load_user, login, refresh, reset_password_cofirm } from "redux/actions/auth/auth";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
-function Home({
-    login,
+function ResetPasswordConfirm({
+    reset_password_cofirm,
     isAuthenticated,
     loading,
     refresh,
     check_authenticated,
     load_user,
 }){
+
+    const params  = useParams()
+    const uid = params.uid
+    const token = params.token
 
     useEffect(()=>{
         isAuthenticated ? <></>:
@@ -25,21 +29,23 @@ function Home({
     },[])
 
     const [formData, setFormData] = useState({
-        email: '',
-        password: ''
+        new_password: '',
+        re_new_password: '',
     });
 
     const { 
-        email,
-        password
+        new_password,
+        re_new_password
     } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
+    const navigate = useNavigate()
 
     const onSubmit = e => {
         e.preventDefault();
-        login(email, password)
+        reset_password_cofirm(uid, token, new_password, re_new_password)
+        navigate('/')
     }
 
     if(isAuthenticated){
@@ -66,32 +72,30 @@ function Home({
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label htmlFor="email-address" className="sr-only">
-                  Email
+                  Password
                 </label>
                 <input
-                  id="email-address"
-                  name="email"
-                  value={email}
+                  name="new_password"
+                  value={new_password}
                   onChange={e=>onChange(e)}
-                  type="email"
+                  type="password"
                   required
-                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-celeste-dos focus:outline-none focus:ring-celeste-dos sm:text-sm"
-                  placeholder="Email"
+                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  placeholder="Nueva contraseña"
                 />
               </div>
               <div>
                 <label htmlFor="password" className="sr-only">
-                  Contraseña
+                  Repeat Password
                 </label>
                 <input
-                  id="password"
-                  name="password"
-                  value={password}
+                  name="re_new_password"
+                  value={re_new_password}
                   onChange={e=>onChange(e)}
                   type="password"
                   required
-                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-celeste-dos focus:outline-none focus:ring-celeste-dos sm:text-sm"
-                  placeholder="Contraseña"
+                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  placeholder="Confirma nueva contraseña"
                 />
               </div>
             </div>
@@ -99,7 +103,7 @@ function Home({
             <div className="flex items-center justify-between">
 
               <div className="text-sm">
-                <Link to='/forgot_password' className="font-medium text-celeste hover:text-celeste-dos">
+                <Link to='/forgot_password' className="font-medium text-indigo-600 hover:text-indigo-500">
                   Olvidaste tu contraseña?
                 </Link>
               </div>
@@ -108,12 +112,12 @@ function Home({
             <div>
               <button
                 type="submit"
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-celeste py-2 px-4 text-sm font-medium text-white hover:bg-celeste-dos focus:outline-none focus:ring-2 focus:ring-celeste focus:ring-offset-2"
+                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <LockClosedIcon className="h-5 w-5 text-white group-hover:text-gray-200" aria-hidden="true" />
+                  <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                 </span>
-                Iniciar Sesión
+                Guardar
               </button>
             </div>
           </form>
@@ -129,8 +133,8 @@ const mapStateToProps=state=>({
 })
 
 export default connect(mapStateToProps, {
-    login,
+    reset_password_cofirm,
     refresh,
     check_authenticated,
     load_user,
-}) (Home)
+}) (ResetPasswordConfirm)

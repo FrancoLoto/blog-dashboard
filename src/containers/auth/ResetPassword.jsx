@@ -1,13 +1,13 @@
 import Layout from "hocs/layout/Layout";
 import { connect } from "react-redux";
-import { LockClosedIcon } from '@heroicons/react/20/solid'
 import logo from 'assets/img/logo.png'
 import { useEffect, useState } from "react";
-import { check_authenticated, load_user, login, refresh } from "redux/actions/auth/auth";
-import { Link, Navigate } from "react-router-dom";
+import { check_authenticated, load_user, login, refresh, reset_password } from "redux/actions/auth/auth";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
 
-function Home({
-    login,
+function ResetPassword({
+    reset_password,
     isAuthenticated,
     loading,
     refresh,
@@ -25,21 +25,21 @@ function Home({
     },[])
 
     const [formData, setFormData] = useState({
-        email: '',
-        password: ''
+        email: ''
     });
 
     const { 
-        email,
-        password
+        email
     } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
+    const navigate = useNavigate()
 
     const onSubmit = e => {
         e.preventDefault();
-        login(email, password)
+        reset_password(email)
+        navigate('/')
     }
 
     if(isAuthenticated){
@@ -79,28 +79,14 @@ function Home({
                   placeholder="Email"
                 />
               </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Contraseña
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  value={password}
-                  onChange={e=>onChange(e)}
-                  type="password"
-                  required
-                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-celeste-dos focus:outline-none focus:ring-celeste-dos sm:text-sm"
-                  placeholder="Contraseña"
-                />
-              </div>
             </div>
 
             <div className="flex items-center justify-between">
 
               <div className="text-sm">
-                <Link to='/forgot_password' className="font-medium text-celeste hover:text-celeste-dos">
-                  Olvidaste tu contraseña?
+                <span className="">Ya tienes una cuenta? </span>
+                <Link to='/' className="font-medium text-celeste hover:text-celeste-dos">
+                   Iniciar Sesión
                 </Link>
               </div>
             </div>
@@ -111,9 +97,9 @@ function Home({
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-celeste py-2 px-4 text-sm font-medium text-white hover:bg-celeste-dos focus:outline-none focus:ring-2 focus:ring-celeste focus:ring-offset-2"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <LockClosedIcon className="h-5 w-5 text-white group-hover:text-gray-200" aria-hidden="true" />
+                  <EnvelopeIcon className="h-5 w-5 text-white group-hover:text-gray-200" aria-hidden="true" />
                 </span>
-                Iniciar Sesión
+                Cambiar contraseña
               </button>
             </div>
           </form>
@@ -129,8 +115,8 @@ const mapStateToProps=state=>({
 })
 
 export default connect(mapStateToProps, {
-    login,
+    reset_password,
     refresh,
     check_authenticated,
     load_user,
-}) (Home)
+}) (ResetPassword)
