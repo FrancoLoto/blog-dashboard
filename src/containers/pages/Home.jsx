@@ -1,4 +1,3 @@
-import Layout from "hocs/layout/Layout";
 import { connect } from "react-redux";
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import logo from 'assets/img/logo.png'

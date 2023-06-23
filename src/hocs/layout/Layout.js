@@ -102,6 +102,7 @@ function Layout({
                             <Link to="/" className="ml-4 mt-2">
                             <img
                             src={logo}
+                            alt="logo"
                             width={100}
                             height={80}
                             className=""/>
@@ -117,6 +118,7 @@ function Layout({
                                 <div>
                                 <img
                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                alt="logo"
                                 width={100}
                                 height={80}
                                 className=""/>
@@ -144,6 +146,7 @@ function Layout({
                     <Link to="/" className="ml-4 mt-2">
                             <img
                             src={logo}
+                            alt="logo"
                             width={100}
                             height={60}
                             className=""/>
@@ -157,15 +160,15 @@ function Layout({
                     <button onClick={e=>setOpen(true)} className="group block w-full flex-shrink-0">
                         <div className="flex items-center">
                         <div>
-                            <img
-                            className="inline-block h-9 w-9 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt=""
-                            />
+                        <span className="inline-block h-10 w-10 overflow-hidden rounded-full bg-gray-100">
+                            <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </span>
                         </div>
                         <div className="ml-3">
-                            <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
-                            <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+                            <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user&&user.email}</p>
+                            <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">Cerrar Sesión</p>
                         </div>
                         </div>
                     </button>
@@ -185,7 +188,7 @@ function Layout({
                 </div>
                 <main className="flex-1">
                     <div className="py-6">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+                    <div className="mx-auto max-w-full px-4 sm:px-6 md:px-8">
                         {/* Replace with your content */}
                         {children}
                         {/* /End replace */}

@@ -1,9 +1,8 @@
-import Layout from "hocs/layout/Layout";
 import { connect } from "react-redux";
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import logo from 'assets/img/logo.png'
 import { useEffect, useState } from "react";
-import { check_authenticated, load_user, login, refresh, reset_password_cofirm } from "redux/actions/auth/auth";
+import { check_authenticated, load_user, refresh, reset_password_cofirm } from "redux/actions/auth/auth";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 function ResetPasswordConfirm({

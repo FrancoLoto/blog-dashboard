@@ -1,6 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
-
-import { AnimatePresence } from 'framer-motion'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Error404 from 'containers/errors/Error404'
 import Home from 'containers/pages/Home'
 import Blog from 'containers/pages/blog/Blog'

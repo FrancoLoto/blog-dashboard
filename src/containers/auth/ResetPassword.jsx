@@ -1,8 +1,7 @@
-import Layout from "hocs/layout/Layout";
 import { connect } from "react-redux";
 import logo from 'assets/img/logo.png'
 import { useEffect, useState } from "react";
-import { check_authenticated, load_user, login, refresh, reset_password } from "redux/actions/auth/auth";
+import { check_authenticated, load_user, refresh, reset_password } from "redux/actions/auth/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 

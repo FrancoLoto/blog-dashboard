@@ -1,5 +1,4 @@
 import moment from "moment"
-import { useEffect } from "react"
 import { Link } from "react-router-dom"
 
 function BlogCardHorizontal({data, index}){
@@ -11,13 +10,13 @@ function BlogCardHorizontal({data, index}){
               <Link to={`/blog/${data.slug}`}
                 onMouseEnter={()=>{
                     const title = document.getElementById(`title`+data.id)
-                    title.classList.add('text-indigo-500')
+                    title.classList.add('text-celeste')
                     const img = document.getElementById(index)
                     img.classList.add('object-fill')
                 }}
                 onMouseLeave={()=>{
                     const title = document.getElementById(`title`+data.id)
-                    title.classList.remove('text-indigo-500')
+                    title.classList.remove('text-celeste')
                     const img = document.getElementById(index)
                     img.classList.remove('object-fill')
                 }} 
@@ -25,19 +24,50 @@ function BlogCardHorizontal({data, index}){
                 <div className="flex items-center my-10">
                   <div className="lg:flex min-w-0 lg:flex-1 items-center">
                     <figure className="lg:flex-shrink-0">
-                      <img id={index} className="h-64 lg:w-96 w-full object-cover rounded-lg" src={data.thumbnail} alt="" />
+                    {
+                      data.thumbnail?
+                      <img id={index} className="h-64 lg:w-96 w-full object-cover rounded" src={data.thumbnail} alt="" />
+                      :
+                      <div className=" h-64 lg:w-96 w-full object-cover rounded bg-gray-100"></div>
+                    }
                     </figure>
                     <div className="min-w-0 flex-1 px-8 p-4">
-                        <p id={`title`+data.id} className="lg:mt-0 lg:absolute top-4 text-2xl pb-4 font-semibold transition duration-300 ease-in-out leading-8">
-                            {data.title.length > 100 ? data.title.slice(0,99):data.title}
-                        </p>
+                    {
+                      data.title ?
+                      <p id={`title`+data.id} className=" lg:mt-0 lg:absolute lg:top-4 leading-10 text-3xl pb-4 font-semibold transition duration-300 ease-in-out">{data.title.length > 80 ? data.title.slice(0,79):data.title}</p>
+                      :
+                      <p className=" lg:mt-0 lg:absolute lg:top-4 leading-10 text-3xl pb-4 font-semibold transition duration-300 ease-in-out w-72 py-2 bg-gray-100"></p>
+                    }
                         <div className="lg:absolute lg:top-28">
-                            <span className="hover:text-indigo-500 mt-2 font-medium text-sm"><Link to={`/category/${data.category.slug}`}>{data.category.name}</Link></span> &middot;
+                          {
+                            data.status === 'published'?
+                            <>
+                            <span className=" rounded-full p-1 px-2 bg-green-200 text-green-700  mx-1 font-medium text-sm ">Published</span> <span className="text-gray-300">&middot;</span> 
+                            </>
+                            :
+                            <>
+                            <span className=" rounded-full p-1 px-2 bg-rose-200 text-rose-700  mx-1 font-mediu text-sm ">Draft</span> <span className="text-gray-300">&middot;</span> 
+                            </>
+
+                          }
+                          {
+                            data.category &&
+                            <>
+                            <span className=" hover:text-celeste  mx-1 font-medium text-gray-800 text-sm "><Link to={`/category/${data.category.slug}`}>{data.category.name}</Link></span> <span className="text-gray-300">&middot;</span> 
+                            </>
+                          }
                             <span className="mt-2 font-medium text-sm mx-1">{moment(data.published).format('LL')}</span> &middot;
                             <span className="mt-2 font-medium text-sm mx-1">{data.time_read} min lectura</span>
-                            <p className="mt-4 text-lg font-regular text-gray-800 leading-8">
-                            {data.description}
-                            </p>
+                          {
+                            data.description ?
+                            <p className="mt-4 text-lg font-regular text-gray-800 leading-8">{data.description.length > 150 ? data.description.slice(0,149):data.description}</p>
+                            :
+                            <>
+                            <p className=" w-full py-2 bg-gray-100 mt-4 text-lg font-regular text-gray-800 leading-8"></p>
+                            <p className=" w-full py-2 bg-gray-100 mt-4 text-lg font-regular text-gray-800 leading-8"></p>
+                            <p className=" w-full py-2 bg-gray-100 mt-4 text-lg font-regular text-gray-800 leading-8"></p>
+                            </>
+                          }
                         </div>
                     </div>
                   </div>

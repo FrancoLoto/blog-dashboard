@@ -1,12 +1,10 @@
-import BlogList from "components/blog/BlogList"
 import Layout from "hocs/layout/Layout"
 import { useEffect, useState, Fragment } from "react"
 import { Helmet } from "react-helmet-async"
 import { connect } from "react-redux"
-import { Navigate, useNavigate, useParams } from "react-router-dom"
-import { get_author_blog_list, get_author_blog_list_page, get_blog } from "redux/actions/blog/blog"
+import { useNavigate, useParams } from "react-router-dom"
+import { get_blog } from "redux/actions/blog/blog"
 import { get_categories } from "redux/actions/categories/categories"
-import { PaperClipIcon } from '@heroicons/react/20/solid'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import axios from "axios"
@@ -433,6 +431,7 @@ function EditPost({
                     <a
                         href={`${process.env.REACT_APP_URL}/blog/${post.slug}`}
                         target="_blank"
+                        rel="noreferrer"
                         className="relative mx-1 inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                     >
                         View Post
@@ -454,7 +453,7 @@ function EditPost({
                 <dl className="divide-y divide-gray-200">
 
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                    <dt className="text-lg font-medium text-gray-500">Title</dt>
+                    <dt className="text-lg font-medium text-gray-500">Título</dt>
                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         {
                             updateTitle ?
@@ -476,13 +475,13 @@ function EditPost({
                                     type="submit"
                                     className="rounded-md mr-2 bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Save
+                                    Guardar
                                     </button>
                                     <div
                                     onClick={()=>setUpdateTitle(false)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Cancel
+                                    Cancelar
                                     </div>
                                 </span>
                             </form>
@@ -495,7 +494,7 @@ function EditPost({
                                     onClick={()=>setUpdateTitle(true)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Update
+                                    Editar
                                     </div>
                                 </span>
                             </>
@@ -527,13 +526,13 @@ function EditPost({
                                     type="submit"
                                     className="rounded-md mr-2 bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Save
+                                    Guardar
                                     </button>
                                     <div
                                     onClick={()=>setUpdateSlug(false)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Cancel
+                                    Cancelar
                                     </div>
                                 </span>
                             </form>
@@ -546,7 +545,7 @@ function EditPost({
                                     onClick={()=>setUpdateSlug(true)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Update
+                                    Editar
                                     </div>
                                 </span>
                             </>
@@ -555,14 +554,14 @@ function EditPost({
                 </div>
 
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                    <dt className="text-lg font-medium text-gray-500">Thumbnail</dt>
+                    <dt className="text-lg font-medium text-gray-500">Imágen</dt>
                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         {
                             updateThumbnail ?
                             <>
                             {
                                 previewImage&&
-                                <img src={previewImage} className='object-cover w-80 h-72 p-4'/>
+                                <img src={previewImage} alt="thumbnail" className='object-cover w-80 h-72 p-4'/>
                             }
 
                             <form onSubmit={e=>onSubmit(e)} className="flex w-full">
@@ -580,7 +579,7 @@ function EditPost({
                                     type="submit"
                                     className="rounded-md mr-2 bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Save
+                                    Guardar
                                     </button>
                                     <div
                                     onClick={()=>{
@@ -590,7 +589,7 @@ function EditPost({
                                     }}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Cancel
+                                    Cancelar
                                     </div>
                                 </span>
                             </form>
@@ -600,7 +599,7 @@ function EditPost({
                                 <span className="flex-grow text-lg">
                                     {
                                         post.thumbnail &&
-                                    <img src={post.thumbnail} className='object-cover w-full h-72'/>
+                                    <img src={post.thumbnail} alt="thumbnail" className='object-cover w-full h-72'/>
                                     }
                                     </span>
                                 <span className="ml-4 flex-shrink-0">
@@ -608,7 +607,7 @@ function EditPost({
                                     onClick={()=>setUpdateThumbnail(true)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Update
+                                    Editar
                                     </div>
                                 </span>
                             </>
@@ -617,7 +616,7 @@ function EditPost({
                 </div>
 
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                    <dt className="text-lg font-medium text-gray-500">Description</dt>
+                    <dt className="text-lg font-medium text-gray-500">Descripción</dt>
                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         {
                             updateDescription ?
@@ -640,13 +639,13 @@ function EditPost({
                                     type="submit"
                                     className="rounded-md mr-2 bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Save
+                                    Guardar
                                     </button>
                                     <div
                                     onClick={()=>setUpdateDescription(false)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Cancel
+                                    Cancelar
                                     </div>
                                 </span>
                             </form>
@@ -659,7 +658,7 @@ function EditPost({
                                     onClick={()=>setUpdateDescription(true)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Update
+                                    Editar
                                     </div>
                                 </span>
                             </>
@@ -668,7 +667,7 @@ function EditPost({
                 </div>
 
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                    <dt className="text-lg font-medium text-gray-500">Content</dt>
+                    <dt className="text-lg font-medium text-gray-500">Contenido</dt>
                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         {
                             updateContent ?
@@ -690,13 +689,13 @@ function EditPost({
                                     type="submit"
                                     className="rounded-md mr-2 bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Save
+                                    Guardar
                                     </button>
                                     <div
                                     onClick={()=>setUpdateContent(false)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Cancel
+                                    Cancelar
                                     </div>
                                 </span>
                             </form>
@@ -723,14 +722,14 @@ function EditPost({
                                                     className="w-full border border-gray-900 text-gray-900 bg-white py-2"
                                                     onClick={()=>setShowFullContent(false)}
                                                     >
-                                                        Show Less
+                                                        Mostrar menos
                                                     </button>
                                                     :
                                                     <button
                                                     className="w-full border border-gray-900 text-gray-900 bg-white py-2"
                                                     onClick={()=>setShowFullContent(true)}
                                                     >
-                                                        Show More
+                                                        Mostrar más
                                                     </button>
                                                 }
                                                 </>
@@ -748,7 +747,7 @@ function EditPost({
                                     onClick={()=>setUpdateContent(true)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Update
+                                    Editar
                                     </div>
                                 </span>
                             </>
@@ -757,7 +756,7 @@ function EditPost({
                 </div>
 
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                    <dt className="text-lg font-medium text-gray-500">Time Read</dt>
+                    <dt className="text-lg font-medium text-gray-500">Tiempo de lectura</dt>
                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         {
                             updateTime ?
@@ -779,13 +778,13 @@ function EditPost({
                                     type="submit"
                                     className="rounded-md mr-2 bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Save
+                                    Guardar
                                     </button>
                                     <div
                                     onClick={()=>setUpdateTime(false)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Cancel
+                                    Cancelar
                                     </div>
                                 </span>
                             </form>
@@ -798,7 +797,7 @@ function EditPost({
                                     onClick={()=>setUpdateTime(true)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Update
+                                    Editar
                                     </div>
                                 </span>
                             </>
@@ -882,13 +881,13 @@ function EditPost({
                                     type="submit"
                                     className="rounded-md mr-2 bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Save
+                                    Guardar
                                     </button>
                                     <div
                                     onClick={()=>setUpdateCategory(false)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Cancel
+                                    Cancelar
                                     </div>
                                 </span>
                             </form>
@@ -909,7 +908,7 @@ function EditPost({
                                     onClick={()=>setUpdateCategory(true)}
                                     className="cursor-pointer inline-flex rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500"
                                     >
-                                    Update
+                                    Editar
                                     </div>
                                 </span>
                             </>
@@ -973,7 +972,7 @@ function EditPost({
                                 <></>
                                 :
                                 <p className="text-sm text-gray-500">
-                                    To publish this post you must add: Title, Description, Slug and Content
+                                    Para publicar este post debes agregar: Título, Descripción, Slug y Contenido
                                 </p>
                                 
 
@@ -993,7 +992,7 @@ function EditPost({
                                                 className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
                                                 
                                             >
-                                                    <span>Draft</span>
+                                                    <span>Borrador</span>
                                             </button>
                                             :
                                             <></>
@@ -1005,7 +1004,7 @@ function EditPost({
                                                 className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
                                                 
                                             >
-                                                    <span>Publish</span>
+                                                    <span>Publicado</span>
                                             </button>
                                             :
                                             <></>
