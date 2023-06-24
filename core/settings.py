@@ -165,7 +165,6 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 
-
 if not DEBUG:
     ALLOWED_HOSTS=env.list('ALLOWED_HOSTS_DEPLOY')
     CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEPLOY')
@@ -201,3 +200,6 @@ if not DEBUG:
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
