@@ -76,7 +76,7 @@ function Layout({
                         leaveFrom="translate-x-0"
                         leaveTo="-translate-x-full"
                     >
-                        <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-white">
+                        <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-black">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-in-out duration-300"
@@ -99,7 +99,7 @@ function Layout({
                         </Transition.Child>
                         <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
                             <div className="flex flex-shrink-0 items-center px-4">
-                            <Link to="/" className="ml-4 mt-2">
+                            <Link to="/dashboard" className="ml-4 mt-2">
                             <img
                             src={logo}
                             alt="logo"
@@ -113,22 +113,21 @@ function Layout({
                             </nav>
                         </div>
                         <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                            <button onClick={e=>setOpen(true)} className="group block flex-shrink-0">
+                        <button onClick={e=>setOpen(true)} className="group block w-full flex-shrink-0">
                             <div className="flex items-center">
-                                <div>
-                                <img
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                alt="logo"
-                                width={100}
-                                height={80}
-                                className=""/>
-                                </div>
-                                <div className="ml-3">
-                                <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
-                                <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
-                                </div>
+                            <div>
+                            <span className="inline-block h-10 w-10 overflow-hidden rounded-full bg-gray-100">
+                                <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </span>
                             </div>
-                            </button>
+                            <div className="ml-3">
+                                <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user&&user.email}</p>
+                                <p className="text-xs font-medium text-gray-100 group-hover:text-gray-400">Cerrar Sesión</p>
+                            </div>
+                            </div>
+                        </button>
                         </div>
                         </Dialog.Panel>
                     </Transition.Child>
@@ -140,10 +139,10 @@ function Layout({
                 {/* Static sidebar for desktop */}
                 <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
-                    <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+                <div className="bg-black flex min-h-0 flex-1 flex-col border-r border-gray-200">
+                    <div className=" flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
                     <div className="flex flex-shrink-0 items-center px-4">
-                    <Link to="/" className="ml-4 mt-2">
+                    <Link to="/dashboard" className="ml-4 mt-2">
                             <img
                             src={logo}
                             alt="logo"
@@ -152,7 +151,7 @@ function Layout({
                             className=""/>
                     </Link>
                     </div>
-                    <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
+                    <nav className="bg-black mt-5 flex-1 space-y-1  px-2">
                         <Sidebar/>
                     </nav>
                     </div>
@@ -168,7 +167,7 @@ function Layout({
                         </div>
                         <div className="ml-3">
                             <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user&&user.email}</p>
-                            <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">Cerrar Sesión</p>
+                            <p className="text-xs font-medium text-gray-100 group-hover:text-gray-400">Cerrar Sesión</p>
                         </div>
                         </div>
                     </button>
@@ -234,7 +233,7 @@ function Layout({
                                   </Dialog.Title>
                                 <div className="mt-2">
                                     <p className="text-sm text-gray-500">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.
+                                    Confirma si quieres salir de tu cuenta. Para volver a entrar deberás autenticarte.
                                     </p>
                                 </div>
                                 </div>
@@ -242,7 +241,7 @@ function Layout({
                               <div className="mt-5 sm:mt-6">
                                 <button
                                 type="button"
-                                className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                                className="inline-flex w-full justify-center rounded-md border border-transparent bg-celeste px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-celeste-dos focus:outline-none focus:ring-2 focus:ring-celeste focus:ring-offset-2 sm:text-sm"
                                 onClick={() =>handleLogout()}
                                 >
                                 Cerrar Sesión

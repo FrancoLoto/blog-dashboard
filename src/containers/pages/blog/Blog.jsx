@@ -28,34 +28,16 @@ function Blog({
         <Layout>
             <Helmet>
                 <title>MG Seguridad Privada | Admin Blog</title>
-                <meta name="description" content="Sección de blog de Marketing"/> 
-                <meta name="keywords" content='blog de MG Seguridad Privada, seguridad privada blog'/>
-                <meta name="robots" content='all'/>
                 <link rel="canonical" href="https://www.mgseguridadprivada.com.ar/"/>
                 <meta name="author" content="Seguridad"/>
                 <meta name="publisher" content="Franco Loto"/>
-
-                {/* Social Media Tags */}
-                <meta property='og:title' content='MG Seguridad Privada'/>
-                <meta property='og:description' content='Sección de blog de Marketing'/>
-                <meta property='og:url' content='https://www.mgseguridadprivada.com.ar/'/>
-                <meta property='og:image' content='https://img.freepik.com/vector-gratis/plantilla-logotipo-marketing-flecha_23-2149105274.jpg'/>
-
-                <meta name="twitter:title" content='MG Seguridad Privada' />
-                <meta
-                    name="twitter:decription"
-                    description='Admin Blog MG Seguriad Privada'
-                />
-                <meta name="twitter:image" content="https://img.freepik.com/vector-gratis/plantilla-logotipo-marketing-flecha_23-2149105274.jpg"/>
-                <meta name="twitter:card" content="summary_large_image"/>
-
             </Helmet>
             <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
             <div className="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
                 <div className="ml-4 mt-4">
                 <h3 className="text-3xl font-medium leading-6 text-gray-900">Blog</h3>
                 <p className="mt-3 text-lg text-gray-500">
-                    Crer o editar un post.
+                    Crear, editar o eliminar una publicación
                 </p>
                 </div>
                 <div className="ml-4 mt-4 flex-shrink-0">
@@ -86,7 +68,7 @@ function Blog({
                         }
                         fetchData()
                     }}
-                    className="relative inline-flex items-center rounded-md border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                    className="relative inline-flex items-center rounded-md border border-transparent bg-celeste px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-celeste-dos focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                 >
                     Crear Post
                 </button>

@@ -4,6 +4,7 @@ import logo from 'assets/img/logo.png'
 import { useEffect, useState } from "react";
 import { check_authenticated, load_user, login, refresh } from "redux/actions/auth/auth";
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function Home({
     login,
@@ -47,6 +48,12 @@ function Home({
 
     return(
         <>
+        <Helmet>
+                <title>MG Seguridad Privada | Iniciar Sesión</title>
+                <link rel="canonical" href="https://www.mgseguridadprivada.com.ar/"/>
+                <meta name="author" content="Seguridad"/>
+                <meta name="publisher" content="Franco Loto"/>
+        </Helmet>
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
