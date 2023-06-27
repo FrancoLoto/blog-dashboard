@@ -2,23 +2,20 @@ import { connect } from "react-redux";
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import logo from 'assets/img/logo.png'
 import { useEffect, useState } from "react";
-import { check_authenticated, load_user, login, refresh } from "redux/actions/auth/auth";
-import { Link, Navigate } from "react-router-dom";
+import { load_user, login, refresh } from "redux/actions/auth/auth";
+import { Navigate } from "react-router-dom";
 
 function Home({
     login,
-    isAuthenticated,
     loading,
     refresh,
-    check_authenticated,
     load_user,
 }){
 
     useEffect(()=>{
-        isAuthenticated ? <></>:
+        
         <>
         {refresh()}
-        {check_authenticated()}
         {load_user()}
         </>
     },[])
@@ -115,13 +112,11 @@ function Home({
 }
 
 const mapStateToProps=state=>({
-    isAuthenticated: state.auth.isAuthenticated,
     loading: state.auth.loading
 })
 
 export default connect(mapStateToProps, {
     login,
     refresh,
-    check_authenticated,
     load_user,
 }) (Home)
