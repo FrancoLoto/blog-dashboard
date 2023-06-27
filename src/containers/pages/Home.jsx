@@ -41,7 +41,7 @@ function Home({
         login(email, password)
     }
 
-    if(isAuthenticated){
+    if(login){
         return <Navigate to='/dashboard'/>
     }
 
@@ -95,14 +95,6 @@ function Home({
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-
-              <div className="text-sm">
-                <Link to='/forgot_password' className="font-medium text-celeste hover:text-celeste-dos">
-                  Olvidaste tu contraseña?
-                </Link>
-              </div>
-            </div>
 
             <div>
               <button
