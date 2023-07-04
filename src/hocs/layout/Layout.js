@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { connect } from "react-redux"
-import logo from 'assets/img/logo.png'
+
 
 
 import Sidebar from 'components/navigation/Sidebar'
@@ -101,7 +101,7 @@ function Layout({
                             <div className="flex flex-shrink-0 items-center px-4">
                             <Link to="/dashboard" className="ml-4 mt-2">
                             <img
-                            src={logo}
+                            src={"https://mgseguridadprivada.s3.us-west-2.amazonaws.com/media/logo.4922371bf8e945770760.png"}
                             alt="logo"
                             width={100}
                             height={80}
@@ -144,7 +144,7 @@ function Layout({
                     <div className="flex flex-shrink-0 items-center px-4">
                     <Link to="/dashboard" className="ml-4 mt-2">
                             <img
-                            src={logo}
+                            src={"https://mgseguridadprivada.s3.us-west-2.amazonaws.com/media/logo.4922371bf8e945770760.png"}
                             alt="logo"
                             width={100}
                             height={60}

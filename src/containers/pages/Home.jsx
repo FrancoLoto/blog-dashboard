@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { LockClosedIcon } from '@heroicons/react/20/solid'
-import logo from 'assets/img/logo.png'
 import { useEffect, useState } from "react";
 import { check_authenticated, load_user, login, refresh } from "redux/actions/auth/auth";
 import { Navigate } from "react-router-dom";
@@ -59,7 +58,7 @@ function Home({
           <div>
             <img
               className="mx-auto h-12 w-auto"
-              src={logo}
+              src={"https://mgseguridadprivada.s3.us-west-2.amazonaws.com/media/logo.4922371bf8e945770760.png"}
               alt="Your Company"
             />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
