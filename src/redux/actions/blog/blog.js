@@ -189,7 +189,7 @@ export const get_blog_list_category_page = (slug, page) => async dispatch => {
     }
 }
 
-export const get_blog = (slug) => async dispatch => {
+export const get_blog_author = (post_id) => async dispatch => {
     const config = {
         headers: {
             'Accept': 'application/json'
@@ -197,7 +197,7 @@ export const get_blog = (slug) => async dispatch => {
     };
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/blog/detail/${slug}`, config);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/blog/author_detail/${post_id}`, config);
 
         if (res.status === 200) {
             dispatch({
