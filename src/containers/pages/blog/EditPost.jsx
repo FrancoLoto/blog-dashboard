@@ -3,7 +3,7 @@ import { useEffect, useState, Fragment } from "react"
 import { Helmet } from "react-helmet-async"
 import { connect } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
-import { get_blog } from "redux/actions/blog/blog"
+import { get_blog, get_blog_author } from "redux/actions/blog/blog"
 import { get_categories } from "redux/actions/categories/categories"
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -15,7 +15,7 @@ import { Dialog, Transition } from '@headlessui/react'
 
 function EditPost({
     post,
-    get_blog,
+    get_blog_author,
     isAuthenticated,
     get_categories,
     categories
@@ -24,13 +24,13 @@ function EditPost({
     const [openDelete, setOpenDelete] = useState(false)
 
     const params = useParams()
-    const slug = params.slug
+    const post_id = params.post_id
 
     useEffect(()=>{
         window.scrollTo(0,0)
-        get_blog(slug)
+        get_blog_author(post_id)
         categories ? <></>: get_categories()
-    },[slug])
+    },[post_id])
 
     const [updateTitle, setUpdateTitle]=useState(false)
     const [updateSlug, setUpdateSlug]=useState(false)
@@ -102,7 +102,8 @@ function EditPost({
 
         const formData = new FormData()
         formData.append('title', title)
-        formData.append('slug', slug)
+        formData.append('slug', post&&post.slug)
+        formData.append('post_id', post&&post.id)
         formData.append('new_slug', new_slug)
         formData.append('description', description)
         formData.append('category', category)
@@ -131,12 +132,9 @@ function EditPost({
 
                 if(res.status === 200){
 
-                    if(new_slug!==''){
-                        await get_blog(new_slug)
-                        navigate(-1)
-                    }else{
-                        await get_blog(slug)
-                    }
+                    
+                    await get_blog_author(post_id)
+                    
 
                     setFormData({ 
                         title:'',
@@ -195,7 +193,7 @@ function EditPost({
         };
 
         const formData = new FormData()
-        formData.append('slug', slug)
+        formData.append('post_id', post_id)
 
         const fetchData = async()=>{
             setLoading(true)
@@ -206,13 +204,9 @@ function EditPost({
 
                 if(res.status === 200){
                     setOpen(false)
-                    if(new_slug!==''){
-                        await get_blog(new_slug)
-                        navigate(-1)
-                    }else{
-                        await get_blog(slug)
-                    }
-
+                    
+                    await get_blog_author(post_id)
+                
                     setFormData({ 
                         title:'',
                         new_slug:'',
@@ -269,7 +263,7 @@ function EditPost({
         };
 
         const formData = new FormData()
-        formData.append('slug', slug)
+        formData.append('post_id', post_id)
 
         const fetchData = async()=>{
             setLoading(true)
@@ -280,12 +274,9 @@ function EditPost({
 
                 if(res.status === 200){
                     setOpen(false)
-                    if(new_slug!==''){
-                        await get_blog(new_slug)
-                        navigate(-1)
-                    }else{
-                        await get_blog(slug)
-                    }
+                    
+                    await get_blog_author(post_id)
+                    
 
                     setFormData({ 
                         title:'',
@@ -343,12 +334,12 @@ function EditPost({
         };
 
         const formData = new FormData()
-        formData.append('slug', slug)
+        formData.append('post_id', post_id)
 
         const fetchData = async()=>{
             setLoading(true)
             try{
-                const res = await axios.delete(`${process.env.REACT_APP_API_URL}/api/blog/delete/${slug}`,
+                const res = await axios.delete(`${process.env.REACT_APP_API_URL}/api/blog/delete/${post_id}`,
                 formData,
                 config)
 
@@ -854,7 +845,7 @@ function EditPost({
                                                     </div>
                                                 )
 
-                                                category.sub_categories.map(sub_category=>{
+                                                category.sub_categories.map(sub_category => {
                                                     result.push(
                                                         <div key={sub_category.id} className='flex items-center h-5 ml-2 mt-1'>
                                                         <input
@@ -1090,5 +1081,6 @@ const mapStateToProps=state=>({
 
 export default connect(mapStateToProps,{
     get_blog,
-    get_categories
+    get_categories,
+    get_blog_author
 }) (EditPost)

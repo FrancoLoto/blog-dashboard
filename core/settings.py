@@ -22,7 +22,6 @@ DEBUG = 'RENDER' not in os.environ
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV')
 
 
-
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,7 +49,8 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyRight', 'JustifyBlock'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+             'JustifyLeft', 'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink'],
             ['RemoveFormat', 'Source']
         ],
@@ -98,8 +98,6 @@ DATABASES = {
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
-
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -124,8 +122,6 @@ PASSWORD_HASHERS = [
 ]
 
 
-
-
 LANGUAGE_CODE = 'es-ar'
 
 TIME_ZONE = 'UTC'
@@ -133,7 +129,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -183,7 +178,9 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://mgseguridadprivada.com.ar/google', 'http://mgseguridadprivada.com.ar/facebook'],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': [
+        'http://mgseguridadprivada.com.ar/google',
+        'http://mgseguridadprivada.com.ar/facebook'],
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
         'user_create': 'apps.user.serializers.UserSerializer',
@@ -204,9 +201,8 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-
 if not DEBUG:
-    ALLOWED_HOSTS=env.list('ALLOWED_HOSTS_DEPLOY')
+    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
     CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEPLOY')
     CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
 
@@ -215,9 +211,8 @@ if not DEBUG:
     }
     DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
-
-
-    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    # django-ckeditor will not work with S3 through
+    # django-storages without this line in settings.py
     AWS_QUERYSTRING_AUTH = False
 
     AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
